@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Gradient Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>🎨 CSS Gradient Generator</h1>
+        <p class="subtitle">
+          Создавайте красивые градиенты и экспортируйте CSS
+        </p>
+      </header>
+
+      <main>
+        <div class="preview-section">
+          <div id="preview" class="preview-box"></div>
+          <div class="css-output">
+            <div class="css-output-header">
+              <span>CSS код</span>
+              <button id="copyBtn" class="btn btn-copy" title="Копировать">
+                📋 Копировать
+              </button>
+            </div>
+            <pre><code id="cssCode"></code></pre>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <!-- Тип градиента -->
+          <div class="control-group">
+            <label>Тип градиента</label>
+            <div class="btn-group">
+              <button class="btn btn-type active" data-type="linear">
+                Linear
+              </button>
+              <button class="btn btn-type" data-type="radial">Radial</button>
+              <button class="btn btn-type" data-type="conic">Conic</button>
+            </div>
+          </div>
+
+          <!-- Направление (для linear) -->
+          <div class="control-group" id="directionGroup">
+            <label>Направление: <span id="directionValue">90°</span></label>
+            <input
+              type="range"
+              id="direction"
+              min="0"
+              max="360"
+              value="90"
+              class="slider"
+            />
+            <div class="direction-presets">
+              <button class="btn btn-preset" data-dir="0">↑</button>
+              <button class="btn btn-preset" data-dir="45">↗</button>
+              <button class="btn btn-preset" data-dir="90">→</button>
+              <button class="btn btn-preset" data-dir="135">↘</button>
+              <button class="btn btn-preset" data-dir="180">↓</button>
+              <button class="btn btn-preset" data-dir="225">↙</button>
+              <button class="btn btn-preset" data-dir="270">←</button>
+              <button class="btn btn-preset" data-dir="315">↖</button>
+            </div>
+          </div>
+
+          <!-- Radial shape -->
+          <div class="control-group hidden" id="radialGroup">
+            <label>Форма</label>
+            <div class="btn-group">
+              <button class="btn btn-shape active" data-shape="circle">
+                Circle
+              </button>
+              <button class="btn btn-shape" data-shape="ellipse">
+                Ellipse
+              </button>
+            </div>
+          </div>
+
+          <!-- Анимация -->
+          <div class="control-group" id="animationGroup">
+            <label>Анимация</label>
+            <div class="btn-group">
+              <button id="animateBtn" class="btn">▶ Анимировать</button>
+            </div>
+            <div id="animationSettings" class="animation-settings hidden">
+              <label>Тип анимации</label>
+              <div class="btn-group" style="margin-bottom: 12px">
+                <button class="btn btn-anim-type active" data-anim="shift">
+                  Shift
+                </button>
+                <button class="btn btn-anim-type" data-anim="rotate">
+                  Rotate
+                </button>
+                <button class="btn btn-anim-type" data-anim="hue">Hue</button>
+              </div>
+              <label>Скорость: <span id="speedValue">3s</span></label>
+              <input
+                type="range"
+                id="animSpeed"
+                min="1"
+                max="20"
+                value="3"
+                class="slider"
+              />
+              <label style="margin-top: 12px">Плавность</label>
+              <div class="btn-group">
+                <button class="btn btn-ease active" data-ease="ease">
+                  Ease
+                </button>
+                <button class="btn btn-ease" data-ease="linear">Linear</button>
+                <button class="btn btn-ease" data-ease="ease-in">In</button>
+                <button class="btn btn-ease" data-ease="ease-out">Out</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Цвета -->
+          <div class="control-group">
+            <label>Цвета градиента</label>
+            <div id="colorStops" class="color-stops"></div>
+            <button id="addColorBtn" class="btn btn-add">
+              + Добавить цвет
+            </button>
+          </div>
+
+          <!-- Пресеты -->
+          <div class="control-group">
+            <label>Пресеты</label>
+            <div id="presets" class="presets-grid"></div>
+          </div>
+
+          <!-- Экспорт -->
+          <div class="control-group">
+            <label>Экспорт</label>
+            <div class="export-buttons">
+              <button
+                id="exportPngBtn"
+                class="btn btn-export"
+                title="Сохранить как изображение"
+              >
+                🖼️ PNG
+              </button>
+              <button id="exportCssBtn" class="btn btn-export">💾 CSS</button>
+              <button id="exportTailwindBtn" class="btn btn-export">
+                🎨 Tailwind
+              </button>
+              <button id="exportClassBtn" class="btn btn-export">
+                📄 Класс
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden">Скопировано!</div>
+
+    <nav class="nav-bottom">
+      <a href="examples.html">🎨 Примеры анимаций</a>
+    </nav>
+
+    <script src="app.js"></script>
+  </body>
+</html>
